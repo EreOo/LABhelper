@@ -16,13 +16,14 @@ public class Analyzer {
     private final IntegerProperty countBox;
     private final IntegerProperty countINTOBox;
     private final ObjectProperty<LocalDate> exp;
+    private final ObjectProperty<LocalDate> dateAdd;
 
     //конструктор по умолчанию
 	public Analyzer() {
 		this(null,null);
 	}
 	
-	//неполный конструктор
+	/**неполный конструктор tset**/
 	public Analyzer(String analyzer, String material)
 	{
 		this.analyzerName = new SimpleStringProperty(analyzer);
@@ -34,10 +35,11 @@ public class Analyzer {
 		this.countBox = new SimpleIntegerProperty(30);
 		this.countINTOBox = new SimpleIntegerProperty(20);
 		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
         
 	}
 
-	//название анализатора гет\сет
+	/**название анализатора гет\сет**/
 	public String getAnalyzerName() {
         return analyzerName.get();
     }
@@ -50,7 +52,7 @@ public class Analyzer {
         return analyzerName;
     }
 	
-    //название расходки гет\сет
+    /**название расходки гет\сет**/
     public String getMaterialName() {
         return materialName.get();
     }
@@ -63,7 +65,7 @@ public class Analyzer {
         return materialName;
     }
     
-    //id расходки
+    /**id расходки**/
     public String getIdMAterial() {
         return idMAterial.get();
     }
@@ -76,7 +78,7 @@ public class Analyzer {
         return idMAterial;
     }
     
-    //кол-во коробок 
+    /**кол-во коробок **/
     public int getСountBox() {
         return countBox.get();
     }
@@ -89,7 +91,7 @@ public class Analyzer {
         return countBox;
     }
     
-    //кол-во в одной коробке
+    /**кол-во в одной коробке**/
     public int getСountINTOBox() {
         return countINTOBox.get();
     }
@@ -102,7 +104,7 @@ public class Analyzer {
         return countINTOBox;
     }
     
-    //срок годности
+    /**срок годности**/
     public LocalDate getExp() {
         return exp.get();
     }
@@ -113,6 +115,19 @@ public class Analyzer {
 
     public ObjectProperty<LocalDate> birthdayProperty() {
         return exp;
+    }
+    
+    /**дата поступления**/
+    public LocalDate getDateAdd() {
+        return dateAdd.get();
+    }
+
+    public void setDateAdd(LocalDate dateAdd) {
+        this.dateAdd.set(dateAdd);
+    }
+
+    public ObjectProperty<LocalDate> dateAddProperty() {
+        return dateAdd;
     }
 	
 }

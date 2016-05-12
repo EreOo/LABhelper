@@ -80,7 +80,9 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // В качестве образца добавляем некоторые данные
-        personData.add(new Analyzer("Hans", "Muster"));
+        personData.add(new Analyzer("WalkWay", "NBC41"));
+        personData.add(new Analyzer("WalkWay", "PBC20"));
+        personData.add(new Analyzer("SensiTitre", "GNID"));
         
     }
 
@@ -95,7 +97,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("LabHelper v0.1");
+        this.primaryStage.setTitle("LABHelper v0.1");
 
         initRootLayout();
 
