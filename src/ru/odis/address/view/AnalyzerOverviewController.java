@@ -1,9 +1,14 @@
 package ru.odis.address.view;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
 import ru.odis.address.model.Analyzer;
 import ru.osdis.address.util.DateUtil;
@@ -16,6 +21,10 @@ public class AnalyzerOverviewController {
 	    private TableColumn<Analyzer, String> analyzerNameColumn;
 	    @FXML
 	    private TableColumn<Analyzer, String> materialNameColumn;
+	    @FXML
+	    private TableColumn<Analyzer, Number> countBoxColumn;
+	    @FXML
+	    private TableColumn<Analyzer, LocalDate> expColumn;
 	    
 
 	    @FXML
@@ -51,12 +60,20 @@ public class AnalyzerOverviewController {
 	    @FXML
 	    private void initialize() {
 	        
-	    	// Инициализация таблицы адресатов 
+	    	// Инициализация таблицы 
+	    	//нализатор
 	        analyzerNameColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().analyzerNameProperty());
+	        //расходка
 	        materialNameColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().materialNameProperty());
-
+	        //кол-во коробок
+	        countBoxColumn.setCellValueFactory(
+	                cellData -> cellData.getValue().countBoxProperty());
+	        //срок годности
+	        expColumn.setCellValueFactory(
+	                cellData -> cellData.getValue().expProperty());
+	        
 	        // Очистка дополнительной информации 
 	        showAnalyzerDetails(null);
 

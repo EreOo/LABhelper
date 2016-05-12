@@ -35,7 +35,7 @@ public class Analyzer {
 		this.countBox = new SimpleIntegerProperty(30);
 		this.countINTOBox = new SimpleIntegerProperty(20);
 		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
-		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999 , 2, 21));
         
 	}
 
@@ -113,7 +113,7 @@ public class Analyzer {
         this.exp.set(exp);
     }
 
-    public ObjectProperty<LocalDate> birthdayProperty() {
+    public ObjectProperty<LocalDate> expProperty() {
         return exp;
     }
     

@@ -83,6 +83,7 @@ public class MainApp extends Application {
         personData.add(new Analyzer("WalkWay", "NBC41"));
         personData.add(new Analyzer("WalkWay", "PBC20"));
         personData.add(new Analyzer("SensiTitre", "GNID"));
+        personData.add(new Analyzer("Crystal", "gr-"));
         
     }
 

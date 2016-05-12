@@ -17,8 +17,8 @@
                     <columns>
                       <TableColumn fx:id="analyzerNameColumn" prefWidth="103.0" text="Анализатор" />
                       <TableColumn fx:id="materialNameColumn" prefWidth="101.0" text="Расходники" />
-                        <TableColumn prefWidth="75.0" text="Количество" />
-                        <TableColumn prefWidth="103.0" text="Срок годности" />
+                        <TableColumn fx:id="countBoxColumn" prefWidth="75.0" text="Количество" />
+                        <TableColumn fx:id="expColumn" prefWidth="103.0" text="Срок годности" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
