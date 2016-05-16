@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,6 +44,8 @@ public class AnalyzerOverviewController {
 	    private Label expLabel;
 	    @FXML
 	    private Label addDateLabel;
+	    @FXML
+	    private Label typeMaterial ;
 
 	    // Ссылка на главное приложение.
 		private MainApp mainApp;
@@ -53,7 +58,7 @@ public class AnalyzerOverviewController {
 	    }
 
 	    /**
-	     * Инициализация класса-контроллера. Этот метод вызывается автоматически
+	     * Инициализация класса-контроллера. вызывается автоматически
 	     * после того, как fxml-файл будет загружен.
 	     */
 	    
@@ -61,7 +66,7 @@ public class AnalyzerOverviewController {
 	    private void initialize() {
 	        
 	    	// Инициализация таблицы 
-	    	//нализатор
+	    	//анализатор
 	        analyzerNameColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().analyzerNameProperty());
 	        //расходка
@@ -104,6 +109,7 @@ public class AnalyzerOverviewController {
 	            countINTOBoxLabel.setText(Integer.toString(analyzer.getСountINTOBox()));
 	            expLabel.setText(DateUtil.format(analyzer.getExp()));
 	            addDateLabel.setText(DateUtil.format(analyzer.getDateAdd()));
+	            typeMaterial.setText(analyzer.getTypeMaterial());
 	             
 	        } else {
 	            // Если analyzer = null, то убираем весь текст.
@@ -114,7 +120,62 @@ public class AnalyzerOverviewController {
 	            countINTOBoxLabel.setText("");
 	            expLabel.setText("");
 	            addDateLabel.setText("");
+	            typeMaterial.setText("");
 	        }
 	    }
+	    
+	    /**
+	     * Удаление анализатора (записи).
+	     */
+	    @FXML
+	    private void deleteAnalyzer() {
+	    	
+	    	int selectedIndex = analyzerTable.getSelectionModel().getSelectedIndex();
+	    
+	    	//спришивает, точно ли хотят удалить?
+	        if (selectedIndex >= 0) {
+	        	
+	        	Alert alert = new Alert(AlertType.CONFIRMATION);
+	            alert.initOwner(mainApp.getPrimaryStage());
+	            alert.setTitle("Внимание");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Вы уверенны, что хотите удалить данные?");
+	           
+	            //кнопки
+	            ButtonType yes = new ButtonType("Да");
+	            ButtonType no = new ButtonType("Нет");
+	            
+	            //добавляем кнопки в окно диалога
+	            alert.getButtonTypes().setAll(yes, no);
+	           
+	            alert.showAndWait();
+	            
+	            //если да - то удаляем
+	            if(alert.getResult() == yes){
+	        	analyzerTable.getItems().remove(selectedIndex);}
+	            
+	        } else {
+	            // Ничего не выбрано.
+	            Alert alert = new Alert(AlertType.WARNING);
+	            alert.initOwner(mainApp.getPrimaryStage());
+	            alert.setTitle("Ошибка");
+	            alert.setHeaderText("Не выбрана запись!");
+	            alert.setContentText("Пожалуйста, выберите данные для удаления.");
+
+	            alert.showAndWait();
+	    }
+	        
 	}
+	    
+	    
+	    
+	    @FXML
+	    private void newAnalyzer() {
+	     
+	        boolean okClicked = mainApp.showAddDialog();
+	       
+	    }
+	    
+	  
+}
 

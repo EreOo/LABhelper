@@ -11,12 +11,15 @@ import javafx.beans.property.StringProperty;
 
 public class Analyzer {
 	private final StringProperty analyzerName;
+	private final StringProperty typeMaterial;
     private final StringProperty materialName;
     private final StringProperty idMAterial;
     private final IntegerProperty countBox;
     private final IntegerProperty countINTOBox;
-    private final ObjectProperty<LocalDate> exp;
     private final ObjectProperty<LocalDate> dateAdd;
+    private final ObjectProperty<LocalDate> exp;
+   
+   
 
     //конструктор по умолчанию
 	public Analyzer() {
@@ -34,10 +37,47 @@ public class Analyzer {
 		this.idMAterial = new SimpleStringProperty("B1111-94");
 		this.countBox = new SimpleIntegerProperty(30);
 		this.countINTOBox = new SimpleIntegerProperty(20);
-		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
-		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999 , 2, 21));
+		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 16));
+		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 20));
+		this.typeMaterial = new SimpleStringProperty("“ест система");
         
 	}
+	
+	/**неполный конструктор tset2**/
+	public Analyzer(String analyzer,String type,String material,String id, Integer countBox, Integer countintoobx)
+	{
+		this.analyzerName = new SimpleStringProperty(analyzer);
+		this.materialName = new SimpleStringProperty(material);
+		this.idMAterial = new SimpleStringProperty(id);
+		this.countBox = new SimpleIntegerProperty(countBox);
+		this.countINTOBox = new SimpleIntegerProperty(countintoobx);
+		this.typeMaterial = new SimpleStringProperty(type);
+		
+		//инфо дл€ тестировани€
+		
+	
+		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 16));
+		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 20));
+		
+        
+	}
+	
+	
+	
+	/**–еальный конструктор**/
+	public Analyzer(String analyzer,String type,String material,String id, Integer countBox, Integer countintoobx, LocalDate exp, LocalDate add)
+	{
+		this.analyzerName = new SimpleStringProperty(analyzer);
+		this.materialName = new SimpleStringProperty(material);
+		this.idMAterial = new SimpleStringProperty(id);
+		this.countBox = new SimpleIntegerProperty(countBox);
+		this.countINTOBox = new SimpleIntegerProperty(countintoobx);
+		this.exp = new SimpleObjectProperty<LocalDate>(exp);
+		this.dateAdd = new SimpleObjectProperty<LocalDate>(add);
+		this.typeMaterial = new SimpleStringProperty(type);
+        
+	}
+	
 
 	/**название анализатора гет\сет**/
 	public String getAnalyzerName() {
@@ -128,6 +168,19 @@ public class Analyzer {
 
     public ObjectProperty<LocalDate> dateAddProperty() {
         return dateAdd;
+    }
+    
+    /**тип расходки**/
+    public String getTypeMaterial() {
+        return typeMaterial.get();
+    }
+
+    public void setTypeMaterial(String typeMaterial) {
+        this.typeMaterial.set(typeMaterial);
+    }
+
+    public StringProperty typeMaterialProperty() {
+        return typeMaterial;
     }
 	
 }

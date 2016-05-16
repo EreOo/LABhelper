@@ -9,14 +9,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.odis.address.model.Analyzer;
+import ru.odis.address.view.AddDialogController;
 import ru.odis.address.view.AnalyzerOverviewController;
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    
+    /**
+     * Список расходников.
+     */
+    private static ObservableList<Analyzer> aData = FXCollections.observableArrayList();
+    
+    public static ObservableList<Analyzer> getData(){
+    	return aData;
+    }
 
     
 
@@ -67,32 +78,58 @@ public class MainApp extends Application {
         return primaryStage;
     }
 
-    
-    
-    
-    /**
-     * Данные, в виде наблюдаемого списка адресатов.
-     */
-    private ObservableList<Analyzer> personData = FXCollections.observableArrayList();
 
     /**
      * Конструктор
      */
     public MainApp() {
         // В качестве образца добавляем некоторые данные
-        personData.add(new Analyzer("WalkWay", "NBC41"));
-        personData.add(new Analyzer("WalkWay", "PBC20"));
-        personData.add(new Analyzer("SensiTitre", "GNID"));
-        personData.add(new Analyzer("Crystal", "gr-"));
+        aData.add(new Analyzer("WalkWay", "NBC41"));
+        aData.add(new Analyzer("WalkWay", "PBC20"));
+        aData.add(new Analyzer("SensiTitre", "GNID"));
+        aData.add(new Analyzer("Crystal", "gr-"));
         
     }
 
     /**
-     * Возвращает данные в виде наблюдаемого списка адресатов.
+     * Возвращает данные в виде наблюдаемого списка.
      * @return
      */
     public ObservableList<Analyzer> getPersonData() {
-        return personData;
+        return aData;
+    }
+    
+    
+    //кнопка НОВЫЙ
+    public  boolean showAddDialog() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/AddDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Новые материалы");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            AddDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
     @Override
