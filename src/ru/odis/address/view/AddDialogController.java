@@ -87,24 +87,27 @@ public class AddDialogController {
     	
     	
     	//роверка заполнения данных
-        if((analyzerName.getText().equals("")) ||
-        		(materialName.getText().equals("")) ||
-        		((countBox.getText().equals("^\\D$"))||
-        				(exp.getValue() == null))){
+        if(analyzerName.getText().equals("") ||
+        		materialName.getText().equals("") ||
+        		countBox.getText().equals("") || 
+        				exp.getValue() == null ||
+        				typeMaterial.getValue() == null)
+        {
         	Alert alert = new Alert(AlertType.WARNING);
         	alert.setTitle("Ошибка");
             alert.setHeaderText(null);
             alert.setContentText("Пожалуйста, заполните корекктно все поля с красной звездочкой.");
             alert.showAndWait();
-            
-            
+           
+           
             
         }
-        else
-        	
-        	
-        {
         
+       	
+        else
+        {
+        	//проверка на данные в строках количество, должны быть цифры иначе ловим ошибку.
+        	try{
     	MainApp.getData().add(new Analyzer(analyzerName.getText(),
     			typeMaterial.getValue(),
     			        materialName.getText(),
@@ -115,7 +118,18 @@ public class AddDialogController {
     			                            addDate.getValue()));
     	 
     	okClicked = true;
-        dialogStage.close();}
+        dialogStage.close();
+        
+         }catch(NumberFormatException ex){
+        	 //не число!
+        	 Alert alert = new Alert(AlertType.WARNING);
+         	 alert.setTitle("Ошибка");
+             alert.setHeaderText(null);
+             alert.setContentText("В строку \"количество\" внесены недопустимые символы! ");
+             alert.showAndWait();
+         }
+        }
+        	
     }
 
     
