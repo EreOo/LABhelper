@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import ru.odis.address.model.Analyzer;
 import ru.odis.address.view.AddDialogController;
 import ru.odis.address.view.AnalyzerOverviewController;
+import ru.odis.address.view.EditDialogController;
 
 public class MainApp extends Application {
 
@@ -87,7 +88,15 @@ public class MainApp extends Application {
         aData.add(new Analyzer("WalkWay", "NBC41"));
         aData.add(new Analyzer("WalkWay", "PBC20"));
         aData.add(new Analyzer("SensiTitre", "GNID"));
-        aData.add(new Analyzer("Crystal", "gr-"));
+        aData.add(new Analyzer("Crystal", "NH"));
+        aData.add(new Analyzer("WalkWay", "PC29"));
+        aData.add(new Analyzer("SensiTitre", "GPID"));
+        aData.add(new Analyzer("SensiTitre", "GP4D"));
+        aData.add(new Analyzer("Crystal", "NG"));
+        aData.add(new Analyzer("Crystal", "PG"));
+        aData.add(new Analyzer("WalkWay", "RYID"));
+        aData.add(new Analyzer("SensiTitre", "GP4D"));
+        aData.add(new Analyzer("SensiTitre", "GNID"));
         
     }
 
@@ -117,10 +126,42 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Передаём адресата в контроллер.
+            // Передаём  в контроллер.
             AddDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // кнопка "изменить"
+    public boolean showEditDialog(Analyzer a) {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/EditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Израсходовано");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём анализатор
+            EditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setAnalyzerE(a);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();

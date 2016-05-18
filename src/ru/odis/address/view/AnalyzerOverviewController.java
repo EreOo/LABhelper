@@ -169,6 +169,7 @@ public class AnalyzerOverviewController {
 	    
 	    
 	    
+	    //новая запись в таблицу
 	    @FXML
 	    private void newAnalyzer() {
 	     
@@ -176,6 +177,33 @@ public class AnalyzerOverviewController {
 	       
 	    }
 	    
-	  
-}
+	    
+	    //редактор
+	    @FXML
+	    private void editAnalyzer() {
+	    	
+	    
+	            
+	            Analyzer selectedA = analyzerTable.getSelectionModel().getSelectedItem();
+	            if (selectedA != null) {
+	                boolean okClicked = mainApp.showEditDialog(selectedA);
+	                
+	            } else {
+	                // Ничего не выбрано.
+	                Alert alert = new Alert(AlertType.WARNING);
+	                alert.initOwner(mainApp.getPrimaryStage());
+	                alert.setTitle("Ошибка");
+	                alert.setHeaderText("Не выбрана запись");
+	                alert.setContentText("Выберите данные для изминения в таблице.");
+
+	                alert.showAndWait();
+	            }
+	     
+	       
+	       
+	    }
+	    
+	    }
+
+
 

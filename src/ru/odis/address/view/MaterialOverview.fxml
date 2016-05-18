@@ -70,7 +70,7 @@
                   <HBox layoutX="116.0" layoutY="304.0" prefHeight="27.0" prefWidth="223.0" spacing="7.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <children>
                         <Button layoutX="167.0" layoutY="297.0" mnemonicParsing="false" onAction="#newAnalyzer" prefHeight="25.0" prefWidth="69.0" text="Новый" />
-                        <Button layoutX="226.0" layoutY="297.0" mnemonicParsing="false" text="Изменить" />
+                        <Button layoutX="226.0" layoutY="297.0" mnemonicParsing="false" onAction="#editAnalyzer" text="Изменить" />
                         <Button layoutX="287.0" layoutY="297.0" mnemonicParsing="false" onAction="#deleteAnalyzer" prefHeight="25.0" prefWidth="66.0" text="Удалить" />
                      </children>
                      <opaqueInsets>
