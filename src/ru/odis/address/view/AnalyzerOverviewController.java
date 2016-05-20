@@ -3,6 +3,10 @@ package ru.odis.address.view;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -10,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
@@ -46,6 +51,11 @@ public class AnalyzerOverviewController {
 	    private Label addDateLabel;
 	    @FXML
 	    private Label typeMaterial ;
+	   
+	    @FXML
+	    private TextField filterField ;
+	    
+	    
 
 	    // Ссылка на главное приложение.
 		private MainApp mainApp;
@@ -79,6 +89,41 @@ public class AnalyzerOverviewController {
 	        expColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().expProperty());
 	        
+	    
+	        //ФИЛЬТР
+	        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+	        FilteredList<Analyzer> filteredData = new FilteredList<>(MainApp.getData(), p -> true);
+
+	        // 2. Set the filter Predicate whenever the filter changes.
+	        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+	            filteredData.setPredicate(analyzer -> {
+	                // If filter text is empty, display all persons.
+	                if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+
+	                // Compare first name and last name of every person with filter text.
+	                String lowerCaseFilter = newValue.toLowerCase();
+
+	                if (analyzer.getAnalyzerName().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches first name.
+	                } else if (analyzer.getMaterialName().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches last name.
+	                }
+	                return false; // Does not match.
+	            });
+	        });
+
+	        // 3. Wrap the FilteredList in a SortedList. 
+	        SortedList<Analyzer> sortedData = new SortedList<>(filteredData);
+
+	        // 4. Bind the SortedList comparator to the TableView comparator.
+	        sortedData.comparatorProperty().bind(analyzerTable.comparatorProperty());
+
+	        // 5. Add sorted (and filtered) data to the table.
+	        analyzerTable.setItems(sortedData);
+	        
+	        
 	        // Очистка дополнительной информации 
 	        showAnalyzerDetails(null);
 
@@ -86,6 +131,9 @@ public class AnalyzerOverviewController {
 	        // дополнительную информацию
 	        analyzerTable.getSelectionModel().selectedItemProperty().addListener(
 	                (observable, oldValue, newValue) -> showAnalyzerDetails(newValue));
+	        
+	        
+	     
 	    }
 
 	    
@@ -94,6 +142,8 @@ public class AnalyzerOverviewController {
 	    public void setMainApp(MainApp mainApp) {
 	        this.mainApp = mainApp;
 
+	        
+	        
 	        // Добавление в таблицу данных из наблюдаемого списка
 	        analyzerTable.setItems(mainApp.getPersonData());
 	    }
@@ -128,7 +178,7 @@ public class AnalyzerOverviewController {
 	     * Удаление анализатора (записи).
 	     */
 	    @FXML
-	    private void deleteAnalyzer() {
+	    private  void  deleteAnalyzer() {
 	    	
 	    	int selectedIndex = analyzerTable.getSelectionModel().getSelectedIndex();
 	    
@@ -152,7 +202,10 @@ public class AnalyzerOverviewController {
 	            
 	            //если да - то удаляем
 	            if(alert.getResult() == yes){
-	        	analyzerTable.getItems().remove(selectedIndex);}
+	            	//MainApp.getData().remove(analyzerTable.getSelectionModel().getFocusedIndex());
+	            	MainApp.getData().remove(analyzerTable.getSelectionModel().getSelectedItem());
+	        	//analyzerTable.getItems().remove(analyzerTable.getSelectionModel());
+	            	}
 	            
 	        } else {
 	            // Ничего не выбрано.
@@ -182,8 +235,7 @@ public class AnalyzerOverviewController {
 	    @FXML
 	    private void editAnalyzer() {
 	    	
-	    
-	            
+	  
 	            Analyzer selectedA = analyzerTable.getSelectionModel().getSelectedItem();
 	            if (selectedA != null) {
 	                boolean okClicked = mainApp.showEditDialog(selectedA);
@@ -202,6 +254,8 @@ public class AnalyzerOverviewController {
 	       
 	       
 	    }
+	    
+	    
 	    
 	    }
 

@@ -30,8 +30,8 @@
          <children>
             <Label text="Анализатор" />
             <Label text="Тип" GridPane.rowIndex="1" />
-            <Label text="Расходный материал" GridPane.rowIndex="2" />
-            <Label text="ID материала (если имеется)" GridPane.rowIndex="3" />
+            <Label text="Название матреиала" GridPane.rowIndex="2" />
+            <Label text="REF  / номер в катологе" GridPane.rowIndex="3" />
             <Label text="Количество коробок" GridPane.rowIndex="4" />
             <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="242.0" text="Количество в одной коробке" textAlignment="RIGHT" textOverrun="LEADING_ELLIPSIS" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Дата поступления" GridPane.rowIndex="5" />
