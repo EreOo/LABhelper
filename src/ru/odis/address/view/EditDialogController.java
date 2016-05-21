@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import ru.odis.address.model.Analyzer;
-import ru.osdis.address.util.DateUtil;
+import ru.odis.address.util.DateUtil;
 
 public class EditDialogController {
 

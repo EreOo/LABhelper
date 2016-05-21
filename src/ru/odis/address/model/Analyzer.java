@@ -2,12 +2,15 @@ package ru.odis.address.model;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ru.odis.address.util.LocalDateAdapter;
 
 public class Analyzer {
 	private final StringProperty analyzerName;
@@ -144,7 +147,8 @@ public class Analyzer {
         return countINTOBox;
     }
     
-    /**срок годности**/
+    //срок годности
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getExp() {
         return exp.get();
     }
@@ -157,7 +161,8 @@ public class Analyzer {
         return exp;
     }
     
-    /**дата поступления**/
+    //дата поступления
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getDateAdd() {
         return dateAdd.get();
     }

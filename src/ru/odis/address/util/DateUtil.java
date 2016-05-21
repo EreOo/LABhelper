@@ -1,4 +1,4 @@
-package ru.osdis.address.util;
+package ru.odis.address.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -19,7 +19,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
 import ru.odis.address.model.Analyzer;
-import ru.osdis.address.util.DateUtil;
+import ru.odis.address.util.DateUtil;
 
 public class AnalyzerOverviewController {
 	
