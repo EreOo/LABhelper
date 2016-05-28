@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -31,9 +32,8 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     
-    /**
-     * Список расходников.
-     */
+    // Список расходников.
+     
     private static ObservableList<Analyzer> aData = FXCollections.observableArrayList();
     
     public static ObservableList<Analyzer> getData(){
@@ -106,19 +106,19 @@ public class MainApp extends Application {
      * Конструктор
      */
     public MainApp() {
-        // В качестве образца добавляем некоторые данные
-        aData.add(new Analyzer("WalkWay", "NBC41"));
-        aData.add(new Analyzer("WalkWay", "PBC20"));
-        aData.add(new Analyzer("SensiTitre", "GNID"));
-        aData.add(new Analyzer("Crystal", "NH"));
-        aData.add(new Analyzer("WalkWay", "PC29"));
-        aData.add(new Analyzer("SensiTitre", "GPID"));
-        aData.add(new Analyzer("SensiTitre", "GP4D"));
-        aData.add(new Analyzer("Crystal", "NG"));
-        aData.add(new Analyzer("Crystal", "PG"));
-        aData.add(new Analyzer("WalkWay", "RYID"));
-        aData.add(new Analyzer("SensiTitre", "GP4D"));
-        aData.add(new Analyzer("SensiTitre", "GNID"));
+//        // В качестве образца добавляем некоторые данные
+//        aData.add(new Analyzer("WalkWay", "NBC41"));
+//        aData.add(new Analyzer("WalkWay", "PBC20"));
+//        aData.add(new Analyzer("SensiTitre", "GNID"));
+//        aData.add(new Analyzer("Crystal", "NH"));
+//        aData.add(new Analyzer("WalkWay", "PC29"));
+//        aData.add(new Analyzer("SensiTitre", "GPID"));
+//        aData.add(new Analyzer("SensiTitre", "GP4D"));
+//        aData.add(new Analyzer("Crystal", "NG"));
+//        aData.add(new Analyzer("Crystal", "PG"));
+//        aData.add(new Analyzer("WalkWay", "RYID"));
+//        aData.add(new Analyzer("SensiTitre", "GP4D"));
+//        aData.add(new Analyzer("SensiTitre", "GNID"));
         
     }
 
@@ -143,10 +143,16 @@ public class MainApp extends Application {
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Новые материалы");
+            
+
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
+            dialogStage.getIcons().add(
+					new Image("file:resources/images/microscope.png"));
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
+            
+
 
             // Передаём  в контроллер.
             AddDialogController controller = loader.getController();
@@ -170,11 +176,14 @@ public class MainApp extends Application {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/EditDialog.fxml"));
+            
             AnchorPane page = (AnchorPane) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Израсходовано");
+            dialogStage.getIcons().add(
+					new Image("file:resources/images/microscope.png"));
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -199,6 +208,8 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("LABHelper v0.1");
+        
+        this.primaryStage.getIcons().add(new Image("file:resources/images/microscope.png"));
 
         initRootLayout();
 
@@ -211,12 +222,11 @@ public class MainApp extends Application {
     
     
     
-    //new add SAVE
+    
     
     /**
-     * Возвращает preference файла адресатов, то есть, последний открытый файл.
-     * Этот preference считывается из реестра, специфичного для конкретной
-     * операционной системы. Если preference не был найден, то возвращается null.
+     * Возвращает preference файла, последний открытый файл.
+     * Если preference не был найден, то возвращается null.
      * 
      * @return
      */
@@ -254,8 +264,7 @@ public class MainApp extends Application {
 }
     
     /**
-     * Загружает информацию об адресатах из указанного файла.
-     * Текущая информация об адресатах будет заменена.
+     * Загружает информацию  из указанного файла.
      * 
      * @param file
      */
@@ -268,13 +277,14 @@ public class MainApp extends Application {
             // Чтение XML из файла и демаршализация.
             ListWrapper wrapper = (ListWrapper) um.unmarshal(file);
 
-           // aData.clear();
+           
             aData.addAll(wrapper.getAnalyzers());
 
             // Сохраняем путь к файлу в реестре.
             setFilePath(file);
 
-        } catch (Exception e) { // catches ANY exception
+        } catch (Exception e) {
+        	// Ловим ошибки
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Could not load data");
@@ -285,7 +295,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Сохраняет текущую информацию об адресатах в указанном файле.
+     * Сохраняет текущую информацию в указанном файле.
      * 
      * @param file
      */
@@ -305,7 +315,7 @@ public class MainApp extends Application {
 
             // Сохраняем путь к файлу в реестре.
             setFilePath(file);
-        } catch (Exception e) { // catches ANY exception
+        } catch (Exception e) { 
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Could not save data");

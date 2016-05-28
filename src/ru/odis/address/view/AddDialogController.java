@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ru.odis.address.MainApp;
@@ -75,6 +76,7 @@ public class AddDialogController {
     	typeMaterial.setItems(FXCollections.observableArrayList(type));
     	
         this.dialogStage = dialogStage;
+        
     }
 
   
@@ -86,7 +88,7 @@ public class AddDialogController {
     public void newAnalyzer() {
     	
     	
-    	//роверка заполнения данных
+    	//проверка заполнения данных
         if(analyzerName.getText().equals("") ||
         		materialName.getText().equals("") ||
         		countBox.getText().equals("") || 
@@ -95,13 +97,12 @@ public class AddDialogController {
         {
         	Alert alert = new Alert(AlertType.WARNING);
         	alert.setTitle("Ошибка");
+        	
             alert.setHeaderText(null);
             alert.setContentText("Пожалуйста, заполните корекктно все поля с красной звездочкой.");
             alert.showAndWait();
-           
-           
-            
         }
+        
         
        	
         else

@@ -105,9 +105,9 @@ public class RootLayoutController {
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("AddressApp");
+        alert.setTitle("LABHelper");
         alert.setHeaderText("About");
-        alert.setContentText("Author: Marco Jakob\nWebsite: http://code.makery.ch");
+        alert.setContentText("Владимир");
 
         alert.showAndWait();
     }

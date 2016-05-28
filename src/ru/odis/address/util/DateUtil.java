@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 public class DateUtil {
 
 	 /** Константа даты. Используем для перевода даты в строку */
-    private static final String DATE_PATTERN = "dd.MM.yyyy";
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
 
     /** Форматировщик даты. */
     private static final DateTimeFormatter DATE_FORMATTER = 

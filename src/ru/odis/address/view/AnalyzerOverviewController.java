@@ -1,7 +1,9 @@
 package ru.odis.address.view;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.Month;
+
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,10 +14,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.paint.Color;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
 import ru.odis.address.model.Analyzer;
@@ -56,6 +61,8 @@ public class AnalyzerOverviewController {
 	    private TextField filterField ;
 	    
 	    
+	    
+	    
 
 	    // Ссылка на главное приложение.
 		private MainApp mainApp;
@@ -79,15 +86,41 @@ public class AnalyzerOverviewController {
 	    	//анализатор
 	        analyzerNameColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().analyzerNameProperty());
-	        //расходка
+	        
+           //название материала
 	        materialNameColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().materialNameProperty());
+	        
+	        
 	        //кол-во коробок
 	        countBoxColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().countBoxProperty());
+	        
+	        
 	        //срок годности
 	        expColumn.setCellValueFactory(
 	                cellData -> cellData.getValue().expProperty());
+	        
+	        
+	        //Выделение цветом строк      
+	        //если просроченно или мало коробок
+	        analyzerTable.setRowFactory(tv -> new TableRow<Analyzer>() {
+	            @Override
+	            public void updateItem(Analyzer item, boolean empty) {
+	                super.updateItem(item, empty) ;
+	                if (item == null) {
+	                    setStyle("");
+	                } else if (item.getExp().isBefore(LocalDate.now())) {
+	                    setStyle("-fx-background-color: tomato;");
+	                } else if (item.getСountBox() <= 5) {
+	                    setStyle("-fx-background-color: yellow;");
+	                } else {
+	                    setStyle("");
+	                }
+	            }
+	        });
+	        
+	        
 	        
 	    
 	        //ФИЛЬТР
@@ -106,11 +139,11 @@ public class AnalyzerOverviewController {
 	                String lowerCaseFilter = newValue.toLowerCase();
 
 	                if (analyzer.getAnalyzerName().toLowerCase().contains(lowerCaseFilter)) {
-	                    return true; // Filter matches first name.
+	                    return true; // filter Analyzer name
 	                } else if (analyzer.getMaterialName().toLowerCase().contains(lowerCaseFilter)) {
-	                    return true; // Filter matches last name.
+	                    return true; // Filter Material
 	                }
-	                return false; // Does not match.
+	                return false; 
 	            });
 	        });
 
@@ -120,7 +153,7 @@ public class AnalyzerOverviewController {
 	        // 4. Bind the SortedList comparator to the TableView comparator.
 	        sortedData.comparatorProperty().bind(analyzerTable.comparatorProperty());
 
-	        // 5. Add sorted (and filtered) data to the table.
+	        // 5. Добавление информации в таблицу.
 	        analyzerTable.setItems(sortedData);
 	        
 	        
