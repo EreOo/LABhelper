@@ -306,7 +306,7 @@ public class MainApp extends Application {
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            // Обёртываем наши данные об адресатах.
+            // Обёртываем наши данные 
             ListWrapper wrapper = new ListWrapper();
             ((ListWrapper) wrapper).setAnalyzers(aData);
 

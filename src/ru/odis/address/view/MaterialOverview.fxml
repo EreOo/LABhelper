@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="340.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.odis.address.view.AnalyzerOverviewController">
+<AnchorPane prefHeight="500.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.odis.address.view.AnalyzerOverviewController">
    <children>
-      <SplitPane dividerPositions="0.5486725663716814" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5973451327433629" layoutY="40.0" prefHeight="300.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <TableView fx:id="analyzerTable" layoutX="14.0" layoutY="14.0" prefHeight="298.0" prefWidth="276.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                     <columns>
                       <TableColumn fx:id="analyzerNameColumn" prefWidth="84.0" text="Анализатор" />
-                      <TableColumn fx:id="materialNameColumn" prefWidth="91.0" text="Расходники" />
+                      <TableColumn fx:id="materialNameColumn" prefWidth="91.0" text="Расход. материал" />
                         <TableColumn fx:id="countBoxColumn" minWidth="0.0" prefWidth="76.0" text="Количество" />
                         <TableColumn fx:id="expColumn" prefWidth="116.0" text="Срок годности" />
                     </columns>
@@ -25,16 +24,23 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <GridPane layoutX="36.0" layoutY="14.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="14.0">
+                  <GridPane layoutX="36.0" layoutY="14.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="5.0">
                      <columnConstraints>
+                        <ColumnConstraints />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
+                        <RowConstraints />
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <HBox alignment="CENTER" layoutX="36.0" layoutY="14.0" spacing="10.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="14.0">
+                        <HBox alignment="CENTER" layoutX="36.0" layoutY="14.0" prefHeight="0.0" prefWidth="327.0" spacing="10.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="14.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
+                              <ImageView fitHeight="44.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/images/analitika_bolshih_dannyh.png" />
+                                 </image>
+                              </ImageView>
                               <TextField fx:id="filterField" alignment="TOP_LEFT" layoutX="36.0" layoutY="14.0" onAction="#initialize" onMouseClicked="#initialize" prefHeight="25.0" prefWidth="233.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="14.0" />
                            </children>
                         </HBox>
@@ -44,12 +50,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label layoutY="6.0" text="Подробная информация:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <Label layoutX="14.0" layoutY="51.0" prefHeight="21.0" prefWidth="259.0" text="Подробная информация:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="51.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <GridPane layoutX="5.0" layoutY="44.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                  <GridPane layoutX="5.0" layoutY="44.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -83,7 +89,7 @@
                         <Label fx:id="typeMaterial" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <HBox layoutX="116.0" layoutY="304.0" prefHeight="27.0" prefWidth="223.0" spacing="7.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                  <HBox layoutX="14.0" layoutY="423.0" prefHeight="27.0" prefWidth="223.0" spacing="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <children>
                         <Button layoutX="167.0" layoutY="297.0" mnemonicParsing="false" onAction="#newAnalyzer" prefHeight="25.0" prefWidth="69.0" text="Новый" />
                         <Button layoutX="226.0" layoutY="297.0" mnemonicParsing="false" onAction="#editAnalyzer" text="Изменить" />
@@ -93,9 +99,79 @@
                         <Insets />
                      </opaqueInsets>
                   </HBox>
+                  <Separator layoutX="-20.0" layoutY="90.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
+                  <Separator layoutX="55.0" layoutY="385.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="264.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="7.0">
+                     <image>
+                        <Image url="@../../../../../resources/images/microscope.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
+      <HBox layoutX="8.0" layoutY="4.0" spacing="5.0">
+         <children>
+            <Button layoutX="8.0" layoutY="4.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/save-icon-silhouette_318-85112.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="60.0" layoutY="4.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/adicionar-um-botao-de-documento_318-25290.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="121.0" layoutY="4.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/documents-folder_318-62108.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <Separator layoutX="138.0" layoutY="4.0" orientation="VERTICAL" prefHeight="32.0" prefWidth="44.0" />
+      <HBox layoutX="182.0" layoutY="4.0" spacing="5.0">
+         <children>
+            <Button layoutX="8.0" layoutY="4.0" mnemonicParsing="false" onAction="#newAnalyzer">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/Box_Crate_With_Downwards_Arrow-128.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="60.0" layoutY="4.0" mnemonicParsing="false" onAction="#editAnalyzer">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/Box_Crate_With_Upwards_Arrow-512.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="121.0" layoutY="4.0" mnemonicParsing="false" onAction="#deleteAnalyzer">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../resources/images/скачанные%20файлы%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

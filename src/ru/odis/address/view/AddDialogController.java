@@ -96,8 +96,8 @@ public class AddDialogController {
         				typeMaterial.getValue() == null)
         {
         	Alert alert = new Alert(AlertType.WARNING);
-        	alert.setTitle("Ошибка");
         	
+        	alert.setTitle("Ошибка");
             alert.setHeaderText(null);
             alert.setContentText("Пожалуйста, заполните корекктно все поля с красной звездочкой.");
             alert.showAndWait();

@@ -45,6 +45,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleOpen() {
+    	 mainApp.getPersonData().clear();
         FileChooser fileChooser = new FileChooser();
 
         // Задаём фильтр расширений
@@ -99,9 +100,7 @@ public class RootLayoutController {
         }
     }
 
-    /**
-     * Открывает диалоговое окно about.
-     */
+    
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -112,11 +111,10 @@ public class RootLayoutController {
         alert.showAndWait();
     }
 
-    /**
-     * Закрывает приложение.
-     */
+    
     @FXML
     private void handleExit() {
+    	handleSave();
         System.exit(0);
     }
 }
