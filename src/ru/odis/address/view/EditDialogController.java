@@ -116,7 +116,13 @@ public class EditDialogController {
         
     	    analyzer.setСountBox(Integer.parseInt(countLabel.getText()));
            
-    	    analyzer.getChengeTime().add(LocalDate.now().toString() +" изминение " + count + "\n");
+    	    if(count < 0){
+    	    analyzer.setChengeTime(analyzer.getChengeTime() + "\n" +
+    	    		LocalDate.now().toString() +" израсходовано (" + count + ")\n");}
+    else{
+    	    	analyzer.setChengeTime(analyzer.getChengeTime() + "\n" +
+        	    		LocalDate.now().toString() +" добавлено (+" + count + ")\n");}
+    	    
     	    
             okClicked = true;
             dialogStage.close();

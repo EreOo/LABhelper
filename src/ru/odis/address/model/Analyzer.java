@@ -22,7 +22,9 @@ public class Analyzer {
     private final IntegerProperty countINTOBox;
     private final ObjectProperty<LocalDate> dateAdd;
     private final ObjectProperty<LocalDate> exp;
-    private final ArrayList<String> chengeTime;
+    private final StringProperty chengeTime;
+    
+    
    
    
 
@@ -45,8 +47,10 @@ public class Analyzer {
 		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 16));
 		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 		this.typeMaterial = new SimpleStringProperty("Тест система");
-		this.chengeTime = new ArrayList<>();
-		chengeTime.add("не было изминений");
+		this.chengeTime = new SimpleStringProperty("");
+		
+		
+		
 		
         
 	}
@@ -75,6 +79,8 @@ public class Analyzer {
 	//Реальный конструктор
 	public Analyzer(String analyzer,String type,String material,String id, Integer countBox, Integer countintoobx, LocalDate exp, LocalDate add)
 	{
+		this.chengeTime = new SimpleStringProperty("");
+		
 		this.analyzerName = new SimpleStringProperty(analyzer);
 		this.materialName = new SimpleStringProperty(material);
 		this.idMAterial = new SimpleStringProperty(id);
@@ -83,15 +89,25 @@ public class Analyzer {
 		this.exp = new SimpleObjectProperty<LocalDate>(exp);
 		this.dateAdd = new SimpleObjectProperty<LocalDate>(add);
 		this.typeMaterial = new SimpleStringProperty(type);
-		this.chengeTime = new ArrayList<>();
+	
+		
+	
         
 	}
 	
 	//список изминений
-	public ArrayList getChengeTime(){
-		
-		return this.chengeTime;
-	}
+	
+	public String getChengeTime() {
+        return chengeTime.get();
+    }
+
+    public void setChengeTime(String chengeTime) {
+        this.chengeTime.set(chengeTime);
+    }
+
+    public StringProperty chengeTimeProperty() {
+        return chengeTime;
+    }
 
 	//название анализатора гет\сет
 	public String getAnalyzerName() {
@@ -198,5 +214,7 @@ public class Analyzer {
     public StringProperty typeMaterialProperty() {
         return typeMaterial;
     }
-	
+    
+    
+    
 }

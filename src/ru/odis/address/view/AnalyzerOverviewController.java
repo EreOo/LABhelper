@@ -20,9 +20,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
@@ -63,7 +65,7 @@ public class AnalyzerOverviewController {
 	    @FXML
 	    private TextField filterField ;
 	    @FXML
-	    private Label chengeTime;
+	    private TextArea chengeTime;
 	    
 	    
 	    //setter TableView
@@ -210,9 +212,9 @@ public class AnalyzerOverviewController {
 	            
 	           
 	          //  chengeTime.setText(analyzer.getChengeTime().toString());
-            for(int i = 0; i < analyzer.getChengeTime().size(); i++){
-       			chengeTime.setText((String) (analyzer.getChengeTime().get(i))  );
-       			};
+	            chengeTime.setText(analyzer.getChengeTime());
+	            
+         
 	             
 	        } else {
 	            // Если analyzer = null, то убираем весь текст.
@@ -224,7 +226,7 @@ public class AnalyzerOverviewController {
 	            expLabel.setText("");
 	            addDateLabel.setText("");
 	            typeMaterial.setText("");
-	            chengeTime.setText("");
+	            chengeTime.clear();
 	        }
 	    }
 	    

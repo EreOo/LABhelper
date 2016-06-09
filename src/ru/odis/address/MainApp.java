@@ -31,6 +31,7 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private String s = "Vladimir.";
     
     // Список расходников.
      
@@ -118,7 +119,7 @@ public class MainApp extends Application {
 //        aData.add(new Analyzer("Crystal", "PG"));
 //        aData.add(new Analyzer("WalkWay", "RYID"));
 //        aData.add(new Analyzer("SensiTitre", "GP4D"));
-//        aData.add(new Analyzer("SensiTitre", "GNID"));
+//aData.add(new Analyzer("SensiTitre", "GNID"));
         
     }
 
