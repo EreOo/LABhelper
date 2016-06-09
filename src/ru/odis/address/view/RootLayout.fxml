@@ -17,13 +17,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Выход" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Изменить">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Добавить" />
-                  <MenuItem mnemonicParsing="false" text="Изменить" />
-                  <MenuItem mnemonicParsing="false" text="Удалить" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="О программе">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="Lab Helber" />

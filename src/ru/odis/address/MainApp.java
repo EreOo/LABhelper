@@ -148,7 +148,7 @@ public class MainApp extends Application {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             dialogStage.getIcons().add(
-					new Image("file:resources/images/microscope.png"));
+					new Image("resources/images/microscope.png"));
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             
@@ -181,9 +181,9 @@ public class MainApp extends Application {
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Израсходовано");
+            dialogStage.setTitle("Изменение");
             dialogStage.getIcons().add(
-					new Image("file:resources/images/microscope.png"));
+					new Image("resources/images/microscope.png"));
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -207,9 +207,9 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("LABHelper v0.1");
+        this.primaryStage.setTitle("LABHelper v1.2");
         
-        this.primaryStage.getIcons().add(new Image("file:resources/images/microscope.png"));
+        this.primaryStage.getIcons().add(new Image("resources/images/microscope.png"));
 
         initRootLayout();
 
@@ -252,12 +252,12 @@ public class MainApp extends Application {
             prefs.put("filePath", file.getPath());
 
             // Обновление заглавия сцены.
-            primaryStage.setTitle("LABHelper v0.1 - " + file.getName());
+            primaryStage.setTitle("LABHelper v1.2 - " + file.getName());
         } else {
             prefs.remove("filePath");
 
             // Обновление заглавия сцены.
-            primaryStage.setTitle("LABHelper v0.1");
+            primaryStage.setTitle("LABHelper v1.2");
         }
     
     
@@ -286,9 +286,10 @@ public class MainApp extends Application {
         } catch (Exception e) {
         	// Ловим ошибки
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
+          
+            alert.setTitle("Ошибка");
+            alert.setHeaderText(null);
+            alert.setContentText("Невозможно загрузить данные:\n" + file.getPath());
 
             alert.showAndWait();
         }
@@ -317,9 +318,9 @@ public class MainApp extends Application {
             setFilePath(file);
         } catch (Exception e) { 
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText(null);
+            alert.setContentText("Невозможно сохранить данные:\n" + file.getPath());
 
             alert.showAndWait();
         }

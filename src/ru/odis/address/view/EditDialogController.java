@@ -1,5 +1,7 @@
 package ru.odis.address.view;
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,6 +32,8 @@ public class EditDialogController {
     private Stage dialogStage;
     private Analyzer analyzer;
     private boolean okClicked = false;
+    
+     int count = 0;
 
     /**
      * Инициализирует класс-контроллер. Этот метод вызывается автоматически
@@ -77,9 +81,13 @@ public class EditDialogController {
     private void minusB() {
         
     	  int i =  Integer.parseInt(countLabel.getText()) - 1;
+    	//счетчик изменений
+  	    count--;
     	  if(i>= 0){
       	    countLabel.setText(Integer.toString(i));
       	  }
+    	
+    	  
         
     }
     
@@ -87,8 +95,10 @@ public class EditDialogController {
     private void plusB() {
         
     	  int i =  Integer.parseInt(countLabel.getText()) + 1;
-    	 
+    	  //счетчик изменений
+  	      count ++;
     	    countLabel.setText(Integer.toString(i));
+    	   
     	  
     	  
     		  
@@ -106,6 +116,8 @@ public class EditDialogController {
         
     	    analyzer.setСountBox(Integer.parseInt(countLabel.getText()));
            
+    	    analyzer.getChengeTime().add(LocalDate.now().toString() +" изминение " + count + "\n");
+    	    
             okClicked = true;
             dialogStage.close();
         

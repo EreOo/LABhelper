@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.odis.address.view.AnalyzerOverviewController">
+<AnchorPane minHeight="500.0" minWidth="950.0" prefHeight="600.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.odis.address.view.AnalyzerOverviewController">
    <children>
       <SplitPane dividerPositions="0.5973451327433629" layoutY="40.0" prefHeight="300.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <items>
@@ -89,48 +90,39 @@
                         <Label fx:id="typeMaterial" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <HBox layoutX="14.0" layoutY="423.0" prefHeight="27.0" prefWidth="223.0" spacing="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                     <children>
-                        <Button layoutX="167.0" layoutY="297.0" mnemonicParsing="false" onAction="#newAnalyzer" prefHeight="25.0" prefWidth="69.0" text="Новый" />
-                        <Button layoutX="226.0" layoutY="297.0" mnemonicParsing="false" onAction="#editAnalyzer" text="Изменить" />
-                        <Button layoutX="287.0" layoutY="297.0" mnemonicParsing="false" onAction="#deleteAnalyzer" prefHeight="25.0" prefWidth="66.0" text="Удалить" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
                   <Separator layoutX="-20.0" layoutY="90.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
-                  <Separator layoutX="55.0" layoutY="385.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="264.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="7.0">
                      <image>
-                        <Image url="@../../../../../resources/images/microscope.png" />
+                        <Image url="@../../../../resources/images/microscope.png" />
                      </image>
                   </ImageView>
+                  <Separator layoutX="-26.0" layoutY="362.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="362.0" />
+                  <ListView fx:id="chengeTime" layoutX="52.0" layoutY="365.0" prefHeight="200.0" prefWidth="274.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="358.0" />
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
       <HBox layoutX="8.0" layoutY="4.0" spacing="5.0">
          <children>
-            <Button layoutX="8.0" layoutY="4.0" mnemonicParsing="false">
+            <Button layoutX="8.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleSave">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../resources/images/save-icon-silhouette_318-85112.png" />
+                        <Image url="@../../../../resources/images/save-icon-silhouette_318-85112.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="60.0" layoutY="4.0" mnemonicParsing="false">
+            <Button layoutX="60.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleNew">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../resources/images/adicionar-um-botao-de-documento_318-25290.png" />
+                        <Image url="@../../../../resources/images/adicionar-um-botao-de-documento_318-25290.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="121.0" layoutY="4.0" mnemonicParsing="false">
+            <Button layoutX="121.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleOpen">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -166,7 +158,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../resources/images/скачанные%20файлы%20(1).png" />
+                        <Image url="@../../../../resources/images/103181.png" />
                      </image>
                   </ImageView>
                </graphic>

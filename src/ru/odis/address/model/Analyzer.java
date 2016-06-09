@@ -1,6 +1,7 @@
 package ru.odis.address.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -21,6 +22,7 @@ public class Analyzer {
     private final IntegerProperty countINTOBox;
     private final ObjectProperty<LocalDate> dateAdd;
     private final ObjectProperty<LocalDate> exp;
+    private final ArrayList<String> chengeTime;
    
    
 
@@ -43,6 +45,9 @@ public class Analyzer {
 		this.exp = new SimpleObjectProperty<LocalDate>(LocalDate.of(2016, 5, 16));
 		this.dateAdd = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 		this.typeMaterial = new SimpleStringProperty("Тест система");
+		this.chengeTime = new ArrayList<>();
+		chengeTime.add("не было изминений");
+		
         
 	}
 	
@@ -78,9 +83,15 @@ public class Analyzer {
 		this.exp = new SimpleObjectProperty<LocalDate>(exp);
 		this.dateAdd = new SimpleObjectProperty<LocalDate>(add);
 		this.typeMaterial = new SimpleStringProperty(type);
+		this.chengeTime = new ArrayList<>();
         
 	}
 	
+	//список изминений
+	public ArrayList getChengeTime(){
+		
+		return this.chengeTime;
+	}
 
 	//название анализатора гет\сет
 	public String getAnalyzerName() {

@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import ru.odis.address.MainApp;
+import ru.odis.address.model.Analyzer;
 
 
 /**
@@ -45,7 +46,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleOpen() {
-    	 mainApp.getPersonData().clear();
+    	 
         FileChooser fileChooser = new FileChooser();
 
         // Задаём фильтр расширений
@@ -55,7 +56,7 @@ public class RootLayoutController {
 
         // Показываем диалог загрузки файла
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
-
+        mainApp.getPersonData().clear();
         if (file != null) {
             mainApp.loadPersonDataFromFile(file);
         }
@@ -103,10 +104,18 @@ public class RootLayoutController {
     
     @FXML
     private void handleAbout() {
+    	
+    	
+    	
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("LABHelper");
-        alert.setHeaderText("About");
-        alert.setContentText("Владимир");
+       alert.setTitle("LABHelper");
+    	alert.initOwner(mainApp.getPrimaryStage());
+        alert.setHeaderText("Спасибо, что установили и пользуетесь LAB Helper.");
+       alert.setContentText("LAB Helper - это open source проект для оптимизации инвентарного учета в лаборатории. \n\n"
+       		+ "Если у Вас возникли вопросы - обратитесь к руководству, которое находится в корневой папке программы.\n\n"
+       		+ "Так же вы можете связаться с разработчиком по ел. почте LabHelperSupport@gmail.com \n\n\n"
+       		+ "by Vladimir Shekhavtsov 2016.");
+      
 
         alert.showAndWait();
     }
@@ -117,4 +126,18 @@ public class RootLayoutController {
     	handleSave();
         System.exit(0);
     }
+    
+  //новая запись в таблицу
+    @FXML
+    private void newAnalyzer() {
+     
+        boolean okClicked = mainApp.showAddDialog();
+       
+    }
+    
+    
+  
+    
+    
+    
 }

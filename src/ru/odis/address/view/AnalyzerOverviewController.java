@@ -1,7 +1,9 @@
 package ru.odis.address.view;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 
 
 
@@ -21,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import ru.odis.address.MainApp;
 import ru.odis.address.model.Analyzer;
@@ -59,9 +62,14 @@ public class AnalyzerOverviewController {
 	   
 	    @FXML
 	    private TextField filterField ;
+	    @FXML
+	    private Label chengeTime;
 	    
 	    
-	    
+	    //setter TableView
+		public  TableView<Analyzer> getAnalyzerTable() {
+			return analyzerTable;
+		}
 	    
 
 	    // Ссылка на главное приложение.
@@ -109,12 +117,18 @@ public class AnalyzerOverviewController {
 	            public void updateItem(Analyzer item, boolean empty) {
 	                super.updateItem(item, empty) ;
 	                if (item == null) {
-	                    setStyle("");
-	                } else if (item.getExp().isBefore(LocalDate.now())) {
-	                    setStyle("-fx-background-color: tomato;");
-	                } else if (item.getСountBox() <= 5) {
-	                    setStyle("-fx-background-color: yellow;");
-	                } else {
+	                    setStyle("");}
+	                
+	                else if (item.getExp().isBefore(LocalDate.now())) {
+	                    setStyle("-fx-background-color: tomato;");}
+	                
+	                else if (item.getExp().isBefore(LocalDate.now().plus(Period.ofDays(30)))) {
+	                    setStyle("-fx-background-color: orange;");} 
+	                
+	                else if (item.getСountBox() <= 5) {
+	                    setStyle("-fx-background-color: khaki;");}
+	                  
+	                else {
 	                    setStyle("");
 	                }
 	            }
@@ -193,6 +207,12 @@ public class AnalyzerOverviewController {
 	            expLabel.setText(DateUtil.format(analyzer.getExp()));
 	            addDateLabel.setText(DateUtil.format(analyzer.getDateAdd()));
 	            typeMaterial.setText(analyzer.getTypeMaterial());
+	            
+	           
+	          //  chengeTime.setText(analyzer.getChengeTime().toString());
+            for(int i = 0; i < analyzer.getChengeTime().size(); i++){
+       			chengeTime.setText((String) (analyzer.getChengeTime().get(i))  );
+       			};
 	             
 	        } else {
 	            // Если analyzer = null, то убираем весь текст.
@@ -204,6 +224,7 @@ public class AnalyzerOverviewController {
 	            expLabel.setText("");
 	            addDateLabel.setText("");
 	            typeMaterial.setText("");
+	            chengeTime.setText("");
 	        }
 	    }
 	    
@@ -283,10 +304,64 @@ public class AnalyzerOverviewController {
 
 	                alert.showAndWait();
 	            }
-	     
-	       
-	       
 	    }
+	    
+	    
+	    @FXML
+	    private void handleNew() {
+	        mainApp.getPersonData().clear();
+	        mainApp.setFilePath(null);
+	    }
+	    
+	    @FXML
+	    private void handleOpen() {
+	    	
+	        FileChooser fileChooser = new FileChooser();
+
+	        // Задаём фильтр расширений
+	        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+	                "XML files (*.xml)", "*.xml");
+	        fileChooser.getExtensionFilters().add(extFilter);
+
+	        // Показываем диалог загрузки файла
+	        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+
+	        mainApp.getPersonData().clear();
+	        if (file != null) {
+	            mainApp.loadPersonDataFromFile(file);
+	        }
+	    }
+	    
+	    @FXML
+	    private void handleSave() {
+	        File personFile = mainApp.getFilePath();
+	        if (personFile != null) {
+	            mainApp.savePersonDataToFile(personFile);
+	        } else {
+	           {FileChooser fileChooser = new FileChooser();
+
+	            // Задаём фильтр расширений
+	            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+	                    "XML files (*.xml)", "*.xml");
+	            fileChooser.getExtensionFilters().add(extFilter);
+
+	            // Показываем диалог сохранения файла
+	            File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+
+	            if (file != null) {
+	                // Make sure it has the correct extension
+	                if (!file.getPath().endsWith(".xml")) {
+	                    file = new File(file.getPath() + ".xml");
+	                }
+	                mainApp.savePersonDataToFile(file);
+	            }};
+	        }
+	    }
+
+	    
+	   
+
+		
 	    
 	    
 	    
