@@ -1,7 +1,11 @@
 package ru.odis.address;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -31,7 +35,8 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private String s = "Vladimir.";
+    
+    private FileChannel channel;
     
     // Список расходников.
      
@@ -208,7 +213,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("LABHelper v1.2");
+        this.primaryStage.setTitle("LABHelper v1.3");
         
         this.primaryStage.getIcons().add(new Image("resources/images/microscope.png"));
 
@@ -248,17 +253,32 @@ public class MainApp extends Application {
      * @param file - файл или null, чтобы удалить путь
      */
     public void setFilePath(File file) {
+    	
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
+            
+//            //синхронизация (когда таблица открыта у одного пользователя, она не доступна другому)
+//            try {
+//            	
+//				channel = new RandomAccessFile(file, "rw").getChannel();
+//				FileLock lock = channel.lock();
+//				
+//
+//			} catch (Exception e) {
+//				
+//				e.printStackTrace();
+//			}
+            
 
             // Обновление заглавия сцены.
-            primaryStage.setTitle("LABHelper v1.2 - " + file.getName());
+            primaryStage.setTitle("LABHelper v1.3 - " + file.getName());
+            
         } else {
             prefs.remove("filePath");
 
             // Обновление заглавия сцены.
-            primaryStage.setTitle("LABHelper v1.2");
+            primaryStage.setTitle("LABHelper v1.3");
         }
     
     
@@ -271,6 +291,7 @@ public class MainApp extends Application {
      */
     public void loadPersonDataFromFile(File file) {
         try {
+        	
             JAXBContext context = JAXBContext
                     .newInstance(ListWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
@@ -288,9 +309,10 @@ public class MainApp extends Application {
         	// Ловим ошибки
             Alert alert = new Alert(AlertType.ERROR);
           
-            alert.setTitle("Ошибка");
+            alert.setTitle("Внимание");
             alert.setHeaderText(null);
-            alert.setContentText("Невозможно загрузить данные:\n" + file.getPath());
+            alert.initOwner(primaryStage);
+            alert.setContentText("Таблиц открыта другим пользователем. Дождитесь окончания сеанса.");
 
             alert.showAndWait();
         }
@@ -302,6 +324,12 @@ public class MainApp extends Application {
      * @param file
      */
     public void savePersonDataToFile(File file) {
+//    	try {
+//			channel.close();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+////			e1.printStackTrace();
+//		}
         try {
             JAXBContext context = JAXBContext
                     .newInstance(ListWrapper.class);
